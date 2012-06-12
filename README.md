@@ -9,7 +9,7 @@ Tiny wrapper to integrate Japanese morphological analyzer and English POS tagger
 	import jp.xii.fn.jaen.JAENTokenizer;
 	import org.atilika.kuromoji.Tokenizer;
 	import edu.stanford.nlp.tagger.maxent.MaxentTagger;
-	public class TestJAENMorphol {
+	public class TestJAENTokenizer {
 		public static void main(String[] args) throws ClassNotFoundException, IOException {
 			MaxentTagger tagger = new MaxentTagger("models/wsj-0-18-left3words.tagger"); // Stanford POS Tagger 
 			Tokenizer tokenizer = Tokenizer.builder().build();                           // Kuromoji Tokenizer
@@ -25,7 +25,7 @@ Tiny wrapper to integrate Japanese morphological analyzer and English POS tagger
 		}
 	}
 
-
+Results:
 	この	連体詞,*,*,*
 	件	名詞,一般,*,*
 	につき	助詞,格助詞,連語,*
