@@ -26,6 +26,7 @@ Tiny wrapper to integrate Japanese morphological analyzer and English POS tagger
 	}
 
 Results:
+
 	この	連体詞,*,*,*
 	件	名詞,一般,*,*
 	につき	助詞,格助詞,連語,*
