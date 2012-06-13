@@ -20,7 +20,7 @@ import org.atilika.kuromoji.Token;
 /**
  * Tiny wrapper to integrate Japanese morphological analyzer and English POS tagger.
  * 
- * @author Susumu OTA
+ * @author Susumu OTA  <susumu.ota at g mail dot com>
  */
 public class JAENToken {
 	private Token token;
@@ -72,15 +72,15 @@ public class JAENToken {
 	}
 
 	public boolean isKnown() {
-		return isJA() ? token.isKnown() : null;
+		return isJA() ? token.isKnown() : !"FW".equals(pos);
 	}
 
 	public boolean isUnknown() {
-		return isJA() ? token.isUnknown() : null;
+		return isJA() ? token.isUnknown() : "FW".equals(pos);
 	}
 
 	public boolean isUser() {
-		return isJA() ? token.isUser() : null;
+		return isJA() ? token.isUser() : false;
 	}
 
 	public int getPosition() {

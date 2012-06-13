@@ -30,7 +30,7 @@ import edu.stanford.nlp.tagger.maxent.MaxentTagger;
 /**
  * Tiny wrapper to integrate Japanese morphological analyzer and English POS tagger.
  * 
- * @author Susumu OTA
+ * @author Susumu OTA  <susumu.ota at g mail dot com>
  */
 public class JAENTokenizer {
 	private Tokenizer tokenizer;

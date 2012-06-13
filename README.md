@@ -4,6 +4,7 @@ JAENTokenizer
 Tiny wrapper to integrate Japanese morphological analyzer and English POS tagger.
 
 ## Usage
+
 	import java.io.*;
 	import jp.xii.fn.jaen.JAENToken;
 	import jp.xii.fn.jaen.JAENTokenizer;
@@ -51,6 +52,7 @@ Results:
 
 
 ## Link
+
 * Kuromoji  
 <http://www.atilika.org/>  
 <https://github.com/atilika/kuromoji>
@@ -59,4 +61,6 @@ Results:
 <http://nlp.stanford.edu/software/tagger.shtml>
 
 ## Author
-Susumu OTA
+
+Susumu OTA  
+susumu.ota at g mail dot com
