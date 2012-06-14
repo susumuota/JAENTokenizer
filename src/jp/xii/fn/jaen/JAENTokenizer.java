@@ -68,7 +68,7 @@ public class JAENTokenizer {
 		List<JAENToken> results = new ArrayList<JAENToken>();
 		for (List<HasWord> sentence : MaxentTagger.tokenizeText(new StringReader(str))) {
 			for (TaggedWord tw : tagger.tagSentence(sentence)) {
-				results.add(new JAENToken(tw.word(), tw.tag()));
+				results.add(new JAENToken(tw.word().replaceAll("\\\\/", "/"), tw.tag()));
 			}
 		}
 		return results;
@@ -90,12 +90,12 @@ public class JAENTokenizer {
 				asciibuf.add(token);
 			} else if (0 < asciibuf.size()) { // not english token => japanese token
 				String surfaces = getSurfaceForms(asciibuf);
-				if (isAlphabet(surfaces)) { // english sentence
-					results.addAll(tokenizeEN(surfaces));
-				} else { // ascii without alphabet == number or symbol => japanese
+				if (isNumber(surfaces)) { // number only => japanese 
 					for (Token ascii : asciibuf) {
 						results.add(new JAENToken(ascii));
 					}
+				} else {
+					results.addAll(tokenizeEN(surfaces));
 				}
 				asciibuf.clear();
 				results.add(new JAENToken(token)); // current token is japanese
@@ -106,12 +106,12 @@ public class JAENTokenizer {
 		// flush buffer
 		if (0 < asciibuf.size()) {
 			String surfaces = getSurfaceForms(asciibuf);
-			if (isAlphabet(surfaces)) {
-				results.addAll(tokenizeEN(surfaces));
-			} else {
+			if (isNumber(surfaces)) {
 				for (Token ascii : asciibuf) {
 					results.add(new JAENToken(ascii));
 				}
+			} else {
+				results.addAll(tokenizeEN(surfaces));
 			}
 			asciibuf.clear();
 		}
@@ -119,14 +119,14 @@ public class JAENTokenizer {
 	}
 
 	private static final Pattern ASCII_PRINTABLE_PATTERN = Pattern.compile("[ -~]+"); // ch >= 32 && ch < 127;
-	private static final Pattern ALPHABET_PATTERN = Pattern.compile(".*[a-zA-Z]+.*");
+	private static final Pattern NUMBER_PATTERN = Pattern.compile("\\d+");
 
 	private boolean isAsciiPrintable(String str) {
 		return ASCII_PRINTABLE_PATTERN.matcher(str).matches();
 	}
 
-	private boolean isAlphabet(String str) {
-		return ALPHABET_PATTERN.matcher(str).matches();
+	private boolean isNumber(String str) {
+		return NUMBER_PATTERN.matcher(str).matches();
 	}
 
 	private static String getSurfaceForms(List<Token> tokens) {
